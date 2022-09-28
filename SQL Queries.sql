@@ -35,3 +35,27 @@ SELECT CASE WHEN runtime < 90 THEN 'less than 90 minutes'
        ROUND(AVG(my_rating), 2) avg_rating
 FROM `iron-gantry-342917.movies_2021.movies`
 GROUP BY 1
+
+--creating column for decades, count decades, find my avg rating
+
+SELECT CASE WHEN release_year >= 2000 THEN CONCAT('20', SUBSTR((CAST(release_year AS STRING)), 3, 1), '0s')
+       ELSE CONCAT(SUBSTR((CAST(release_year AS STRING)), 3, 1), '0s')
+       END decades,
+       COUNT(*) total,
+       ROUND(AVG(my_rating), 2) avg_rating
+FROM `iron-gantry-342917.movies_2021.movies`
+GROUP BY 1
+ORDER BY total
+
+--my total avg rating vs avg rating of letterboxd users
+
+SELECT ROUND(AVG(my_rating), 2) my_avg,
+       ROUND(AVG(average_rating), 2) letterboxd_avg
+FROM `iron-gantry-342917.movies_2021.movies`
+
+--count movies by watch platform
+
+SELECT platform,
+       COUNT(platform) total
+FROM `iron-gantry-342917.movies_2021.movies`
+GROUP BY platform
