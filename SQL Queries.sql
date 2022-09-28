@@ -39,8 +39,8 @@ GROUP BY 1
 --creating column for decades, count decades, find my avg rating
 
 SELECT CASE WHEN release_year >= 2000 THEN CONCAT('20', SUBSTR((CAST(release_year AS STRING)), 3, 1), '0s')
-       ELSE CONCAT(SUBSTR((CAST(release_year AS STRING)), 3, 1), '0s')
-       END decades,
+            ELSE CONCAT(SUBSTR((CAST(release_year AS STRING)), 3, 1), '0s')
+            END decades,
        COUNT(*) total,
        ROUND(AVG(my_rating), 2) avg_rating
 FROM `iron-gantry-342917.movies_2021.movies`
